@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run -e CI=true docker-react npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-west-2" #from AWS Dashboard elasticbeanstalk
+  app: "" #from AWS Dashboard elasticbeanstalk
+  env: "" #from AWS Dashboard elasticbeanstalk
+  bucket_name: ""  #S3 id from AWS Dashboard elasticbeanstalk
+  bucket_path: "docker"  #S3 folder as app name from AWS Dashboard elasticbeanstalk
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY #from AWS and set env variable on Travis CI
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY" #from AWS and set env variable on Travis CI
